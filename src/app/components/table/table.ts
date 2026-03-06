@@ -1,5 +1,7 @@
 import { NgFor } from '@angular/common';
 import { Component, signal } from '@angular/core';
+import { StudentService } from '../../services/student';
+import { IStudent } from '../../models/student.model';
 
 @Component({
   selector: 'app-table',
@@ -8,28 +10,20 @@ import { Component, signal } from '@angular/core';
   styleUrl: './table.scss',
 })
 export class Table {
-  students = [
-    {
-      student_id: "D22390093",
-      name: "Carlos",
-      lastname: "Slim",
-      grade: 5,
-      group: "A",
-      average: 89
-    }, {
-      student_id: "D22390141",
-      name: "Tirzin",
-      lastname: "Gei",
-      grade: 8,
-      group: "A",
-      average: 92
-    }, {
-      student_id: "D22390101",
-      name: "Doctora",
-      lastname: "Lares",
-      grade: 8,
-      group: "B",
-      average: 75
-    }
-  ]
+  students: IStudent[] = [];
+  constructor(private studentsService: StudentService) { }
+
+  ngOnInit(): void {
+    this.loadStudents();
+  }
+
+  loadStudents(): void {
+    this.studentsService.getStudents().subscribe({
+      next: data => {
+        this.students = data
+        console.log('Estudiantes', this.students)
+      },
+      error: err => console.error('Error al cargar estudiantes: ' + err)
+    });
+  }
 }
