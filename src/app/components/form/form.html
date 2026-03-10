@@ -1,34 +1,35 @@
 <div class="card">
     <div class="card-body">
-        <form action="">
+        <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-lg-6">
                     <label for="txtUserId" class="form-label">Número de Control</label>
-                    <input type="text" class="form-control" name="student_id" id="txtUserId">
+                    <input type="text" class="form-control" name="student_id" id="txtUserId"
+                        formControlName="student_id">
                 </div>
                 <div class="col-lg-6">
                     <label for="txtName" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="txtName" name="name">
+                    <input type="text" class="form-control" id="txtName" name="name" formControlName="name">
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
                     <label for="txtLastname" class="form-label">Apellidos</label>
-                    <input type="text" class="form-control" id="txtLastname" name="lastname">
+                    <input type="text" class="form-control" id="txtLastname" name="lastname" formControlName="lastname">
                 </div>
                 <div class="col-lg-6">
                     <label for="txtGrade" class="form-label">Grado</label>
-                    <input type="number" class="form-control" id="txtGrade" name="grade">
+                    <input type="number" class="form-control" id="txtGrade" name="grade" formControlName="grade">
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6">
                     <label for="txtGroup" class="form-label">Grupo</label>
-                    <input type="text" class="form-control" id="txtGroup" name="group">
+                    <input type="text" class="form-control" id="txtGroup" name="group" formControlName="group">
                 </div>
                 <div class="col-lg-6">
                     <label for="txtAverage" class="form-label">Promedio</label>
-                    <input type="number" class="form-control" id="txtAverage" name="average">
+                    <input type="number" class="form-control" id="txtAverage" name="average" formControlName="average">
                 </div>
             </div>
             <div class="row mt-2">
