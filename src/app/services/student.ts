@@ -38,8 +38,8 @@ export class StudentService {
       );
   }
 
-  deleteStudent(id: string): Observable<void>{
-    const url = this.baseUrl + '/deleteOne/' + id; 
+  deleteStudent(id: string): Observable<void> {
+    const url = this.baseUrl + '/deleteOne/' + id;
     return this.http.delete<void>(url, this.httpOptions);
   }
 }

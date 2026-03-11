@@ -18,10 +18,12 @@ export class Table {
 
     this.studentsService.created$.subscribe(s => {
       this.students.push(s);
+      this.cdr.detectChanges();
     });
 
     this.studentsService.deleted$.subscribe(student => {
       this.students = this.students.filter(s => s.student_id != student.student_id);
+      this.cdr.detectChanges();
     });
   }
 
@@ -35,7 +37,7 @@ export class Table {
     });
   }
 
-  removeStudent(id: string){
+  removeStudent(id: string) {
     this.studentsService.deleteStudent(id).subscribe({
       next: () => {
         this.students = this.students.filter(st => st.student_id != id);
