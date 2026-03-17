@@ -19,12 +19,12 @@
       <td>{{student.group}}</td>
       <td>{{student.average}}</td>
       <td>
-        <button class="btn btn-warning">
+        <button class="btn btn-warning" (click)="editStudent(student)">
           <i class="bi bi-pencil-fill"></i>
         </button>
       </td>
       <td>
-        <button class="btn btn-danger" (click)="removeStudent(student.student_id)">
+        <button class="btn btn-danger" (click)="removeStudent(student)">
           <i class="bi bi-trash-fill"></i>
         </button>
       </td>

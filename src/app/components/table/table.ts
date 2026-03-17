@@ -25,6 +25,14 @@ export class Table {
       this.students = this.students.filter(s => s.student_id != student.student_id);
       this.cdr.detectChanges();
     });
+
+    this.studentsService.updated$.subscribe(student => {
+      this.students = this.students.filter(s => s.student_id != student.student_id);
+      console.log(student); //Falta agregar a la tabla, solo se muestra el pasado
+      this.students.push(student);
+      this.cdr.detectChanges();
+    });
+    
   }
 
   loadStudents(): void {
@@ -37,13 +45,21 @@ export class Table {
     });
   }
 
-  removeStudent(id: string) {
-    this.studentsService.deleteStudent(id).subscribe({
+  removeStudent (student: IStudent) {
+    this.studentsService.deleteStudent(student).subscribe({
       next: () => {
-        this.students = this.students.filter(st => st.student_id != id);
+        this.students = this.students.filter(st => st.student_id != student.student_id);
+        this.cdr.detectChanges();
       },
-      error: err => console.log('Error al eliminar estudiante>', err)
+      error: err => {
+        console.log('Error al eliminar estudiante>', err);
+        alert('Error al eliminar al estudiante');
+      }
     });
+  }
+
+  editStudent(student: IStudent) {
+    this.studentsService.selectStudent(student);
   }
 
 }

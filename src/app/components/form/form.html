@@ -14,7 +14,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-6">
-                    <label for="txtLastname" class="form-label">Apellidos</label>
+                    <label for="txtLastname" class="form-label">Apellidoos</label>
                     <input type="text" class="form-control" id="txtLastname" name="lastname" formControlName="lastname">
                 </div>
                 <div class="col-lg-6">
@@ -35,6 +35,9 @@
             <div class="row mt-2">
                 <div class="col-lg-3">
                     <input type="submit" class="btn btn-primary" value="Guardar">
+                </div>
+                <div class="col-lg-3">
+                    <button (click)="clearForm()" type="reset" class="btn btn-outline-danger">Limpiar</button>
                 </div>
             </div>
         </form>

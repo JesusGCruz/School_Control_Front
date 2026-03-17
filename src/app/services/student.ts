@@ -21,6 +21,13 @@ export class StudentService {
   private _deleted$ = new Subject<IStudent>();
   deleted$ = this._deleted$.asObservable();
 
+  private _updated$ = new Subject<IStudent>();
+  updated$ = this._updated$.asObservable();
+
+  private _editStudent = new Subject<IStudent>();
+  edit$ = this._editStudent.asObservable();
+
+
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
@@ -31,15 +38,26 @@ export class StudentService {
 
   createStudent(student: IStudent): Observable<IStudent> {
     console.log(student, this.httpOptions.headers);
-    //this.http.post<IStudent>(this.baseUrl + '/api/students/insertOne', student, this.httpOptions)
     return this.http.post<IStudent>(this.baseUrl + '/insertOne', student, this.httpOptions)
       .pipe(
         tap(s => this._created$.next(s))
       );
   }
 
-  deleteStudent(id: string): Observable<void> {
-    const url = this.baseUrl + '/deleteOne/' + id;
+  deleteStudent(student: IStudent): Observable<void> {
+    const url = this.baseUrl + '/deleteOne/' + student.student_id;
     return this.http.delete<void>(url, this.httpOptions);
+  }
+
+  updateStudent(student: IStudent): Observable<IStudent> {
+    const url = this.baseUrl + '/updateOne/' + student.student_id;
+    return this.http.put<IStudent>(url, student, this.httpOptions)
+      .pipe(
+        tap(() => this._updated$.next(student))
+      );
+  }
+
+  selectStudent(student:IStudent){
+    this._editStudent.next(student);
   }
 }
